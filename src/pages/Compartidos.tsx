@@ -6,8 +6,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Users, Inbox, Send, Check, X, Loader2, MessageCircle } from "lucide-react";
+import { Users, Inbox, Send, Check, X, Loader2, MessageCircle, Search } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
+import { UserSearchBar } from "@/components/UserSearchBar";
 import { ConnectionService } from "@/services/connection.service";
 import { ConversationService } from "@/services/conversation.service";
 import { useAuth } from "@/contexts/AuthContext";
@@ -115,6 +116,27 @@ export default function Compartidos() {
     } finally {
       setProcessingId(null);
     }
+  };
+
+  const handleSendConnectionRequest = async (userId: string) => {
+    try {
+      await ConnectionService.sendConnectionRequest({
+        shared_user_id: userId,
+      });
+      // Recargar solicitudes enviadas para mostrar la nueva
+      await loadAllData();
+    } catch (error: any) {
+      throw error; // Re-lanzar para que UserSearchBar maneje el error
+    }
+  };
+
+  // Obtener IDs de usuarios que ya son compartidos o tienen solicitudes pendientes
+  const getExcludedUserIds = (): string[] => {
+    const connectedIds = connections.map((c) => c.other_user_id);
+    const pendingIds = pendingRequests.map((r) => r.other_user_id);
+    const sentIds = sentRequests.map((r) => r.other_user_id);
+
+    return [...connectedIds, ...pendingIds, ...sentIds];
   };
 
   const ConnectionCard = ({
@@ -258,11 +280,15 @@ export default function Compartidos() {
           </div>
         </div>
 
-        <Tabs defaultValue="connections" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+        <Tabs defaultValue="search" className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="search">
+              <Search className="h-4 w-4 mr-2" />
+              Buscar
+            </TabsTrigger>
             <TabsTrigger value="connections">
               <Users className="h-4 w-4 mr-2" />
-              Mis Compartidos ({connections.length})
+              Compartidos ({connections.length})
             </TabsTrigger>
             <TabsTrigger value="pending">
               <Inbox className="h-4 w-4 mr-2" />
@@ -273,6 +299,20 @@ export default function Compartidos() {
               Enviadas ({sentRequests.length})
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="search" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Buscar Usuarios</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <UserSearchBar
+                  onAddShared={handleSendConnectionRequest}
+                  excludeUserIds={getExcludedUserIds()}
+                />
+              </CardContent>
+            </Card>
+          </TabsContent>
 
           <TabsContent value="connections" className="mt-6 space-y-4">
             {connections.length === 0 ? (

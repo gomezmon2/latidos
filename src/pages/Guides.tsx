@@ -106,16 +106,22 @@ const Guides = () => {
                     Los compartidos son conexiones bidireccionales con otros usuarios que te permiten ver sus historias privadas
                   </p>
                   <p className="mt-3">
-                    <strong>Enviar solicitud:</strong> Desde el perfil de cualquier usuario
+                    <strong>Buscar usuarios:</strong> Ve a Compartidos y usa la pestaña "Buscar" para encontrar usuarios por nombre
                   </p>
                   <p>
-                    <strong>Aceptar solicitud:</strong> En tu perfil verás las solicitudes pendientes
+                    <strong>Enviar solicitud:</strong> Desde el buscador de usuarios o desde el detalle de cualquier historia
                   </p>
                   <p>
-                    <strong>Gestionar compartidos:</strong> Puedes eliminar conexiones en cualquier momento
+                    <strong>Aceptar solicitud:</strong> Ve a la pestaña "Recibidas" para ver y gestionar solicitudes pendientes
+                  </p>
+                  <p>
+                    <strong>Ver solicitudes enviadas:</strong> En la pestaña "Enviadas" puedes cancelar solicitudes que hayas enviado
+                  </p>
+                  <p>
+                    <strong>Gestionar compartidos:</strong> Puedes eliminar conexiones en cualquier momento desde la pestaña "Compartidos"
                   </p>
                   <p className="mt-4 text-sm">
-                    Solo los compartidos con estado "Aceptado" pueden ver tus historias privadas
+                    Solo los compartidos con estado "Aceptado" pueden ver tus historias privadas y enviar mensajes
                   </p>
                 </div>
               </div>
