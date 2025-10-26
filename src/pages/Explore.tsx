@@ -1,19 +1,26 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Navbar } from "@/components/Navbar";
 import { ExperienceCard } from "@/components/ExperienceCard";
 import { TagFilterBar } from "@/components/TagFilterBar";
+import { EmptyState } from "@/components/EmptyState";
 import { ExperienceService } from "@/services/experience.service";
-import { Search, Filter } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Search, Filter, BookOpen, Plus } from "lucide-react";
+import { ROUTES } from "@/routes";
 import type { ExperienceWithAuthor } from "@/types/experience";
 
 /**
- * Explore Page
+ * Explore Page / Dashboard
  * Browse and search through all experiences
+ * Acts as main dashboard for authenticated users
  */
 const Explore = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
   const [experiences, setExperiences] = useState<ExperienceWithAuthor[]>([]);
@@ -84,10 +91,12 @@ const Explore = () => {
           {/* Page Title */}
           <div className="mb-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Explora historias auténticas
+              {user ? "Tu Feed" : "Explora historias auténticas"}
             </h1>
             <p className="text-xl text-muted-foreground">
-              Descubre experiencias reales compartidas por nuestra comunidad
+              {user
+                ? "Descubre historias de la comunidad y tus compartidos"
+                : "Descubre experiencias reales compartidas por nuestra comunidad"}
             </p>
           </div>
 
@@ -154,21 +163,38 @@ const Explore = () => {
 
           {/* Empty State */}
           {!isLoading && filteredExperiences.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-2xl font-semibold mb-2">
-                {searchQuery
-                  ? "No se encontraron experiencias"
-                  : "Aún no hay historias"}
-              </p>
-              <p className="text-muted-foreground mb-6">
-                {searchQuery
-                  ? "Intenta con otros términos de búsqueda"
-                  : "Sé el primero en compartir una experiencia auténtica"}
-              </p>
-              <Button onClick={() => setSearchQuery("")}>
-                {searchQuery ? "Limpiar búsqueda" : "Compartir mi historia"}
-              </Button>
-            </div>
+            <EmptyState
+              icon={searchQuery || selectedTagIds.length > 0 ? Search : BookOpen}
+              title={
+                searchQuery || selectedTagIds.length > 0
+                  ? "No se encontraron historias"
+                  : "Aún no hay historias"
+              }
+              description={
+                searchQuery || selectedTagIds.length > 0
+                  ? "Intenta ajustar los filtros o términos de búsqueda para encontrar más resultados"
+                  : user
+                  ? "Sé el primero en compartir una experiencia auténtica con la comunidad"
+                  : "Regístrate para comenzar a explorar y compartir experiencias auténticas"
+              }
+              actionLabel={
+                searchQuery || selectedTagIds.length > 0
+                  ? "Limpiar filtros"
+                  : user
+                  ? "Compartir mi historia"
+                  : "Registrarse"
+              }
+              onAction={() => {
+                if (searchQuery || selectedTagIds.length > 0) {
+                  setSearchQuery("");
+                  setSelectedTagIds([]);
+                } else if (user) {
+                  navigate(ROUTES.CREATE);
+                } else {
+                  navigate(ROUTES.REGISTER);
+                }
+              }}
+            />
           )}
         </div>
       </main>

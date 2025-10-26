@@ -1,5 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { MessageNotifications } from "./MessageNotifications";
+import { FloatingActionButton } from "./FloatingActionButton";
+import { ScrollToTop } from "./ScrollToTop";
 
 /**
  * AppWrapper Component
@@ -9,6 +11,8 @@ export const AppWrapper = () => {
   return (
     <>
       <MessageNotifications />
+      <FloatingActionButton />
+      <ScrollToTop />
       <Outlet />
     </>
   );

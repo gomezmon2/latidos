@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/sections";
-import { Book, Heart, Lock, Users, FileText, Share2, CircleDot, MessageCircle } from "lucide-react";
+import { Book, Heart, Lock, Users, FileText, Share2, CircleDot, MessageCircle, Palette, Search, ArrowUp } from "lucide-react";
 
 /**
  * Guides Page
@@ -239,6 +239,114 @@ const Guides = () => {
                   </p>
                   <p className="mt-4 text-sm">
                     Usa etiquetas descriptivas y relevantes para ayudar a otros a encontrar tu historia
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Búsqueda y filtros */}
+          <section className="bg-card border rounded-lg p-6">
+            <div className="flex items-start gap-4">
+              <Search className="h-6 w-6 text-primary mt-1" />
+              <div>
+                <h2 className="text-2xl font-semibold mb-3">Búsqueda y filtros</h2>
+                <div className="space-y-2 text-muted-foreground">
+                  <p>
+                    <strong>Barra de búsqueda:</strong> Busca historias por título, contenido o autor en la página Explorar
+                  </p>
+                  <p>
+                    <strong>Filtros por etiquetas:</strong> Usa la barra de etiquetas para filtrar por temas específicos
+                  </p>
+                  <p>
+                    <strong>Combinar filtros:</strong> Puedes combinar búsqueda de texto y etiquetas simultáneamente
+                  </p>
+                  <p>
+                    <strong>Limpiar filtros:</strong> El botón "Limpiar filtros" restablece todos los criterios de búsqueda
+                  </p>
+                  <p className="mt-4 text-sm">
+                    Los resultados se actualizan en tiempo real mientras escribes
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Personalización */}
+          <section className="bg-card border rounded-lg p-6">
+            <div className="flex items-start gap-4">
+              <Palette className="h-6 w-6 text-primary mt-1" />
+              <div>
+                <h2 className="text-2xl font-semibold mb-3">Personalización</h2>
+                <div className="space-y-2 text-muted-foreground">
+                  <p>
+                    <strong>Modo oscuro:</strong> Activa el modo oscuro desde el icono de sol/luna en el navbar
+                  </p>
+                  <p>
+                    <strong>Tres opciones:</strong> Claro, Oscuro, o Sistema (se adapta a tu dispositivo)
+                  </p>
+                  <p>
+                    <strong>Persistencia:</strong> Tu preferencia se guarda automáticamente
+                  </p>
+                  <p className="mt-4 text-sm">
+                    El modo oscuro reduce la fatiga visual durante el uso nocturno
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Navegación rápida */}
+          <section className="bg-card border rounded-lg p-6">
+            <div className="flex items-start gap-4">
+              <ArrowUp className="h-6 w-6 text-primary mt-1" />
+              <div>
+                <h2 className="text-2xl font-semibold mb-3">Navegación rápida</h2>
+                <div className="space-y-2 text-muted-foreground">
+                  <p>
+                    <strong>Botón flotante "Historias":</strong> Crea una nueva historia desde cualquier página
+                  </p>
+                  <p>
+                    <strong>Botón volver arriba:</strong> Aparece al hacer scroll, te lleva al inicio de la página
+                  </p>
+                  <p>
+                    <strong>Navbar con iconos:</strong> Acceso rápido a Home, Explorar, Mensajes y Compartidos
+                  </p>
+                  <p>
+                    <strong>Badges de notificaciones:</strong> Contador en tiempo real de mensajes no leídos
+                  </p>
+                  <p className="mt-4 text-sm">
+                    La interfaz está optimizada para móviles y escritorio
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Indicadores visuales */}
+          <section className="bg-card border rounded-lg p-6">
+            <div className="flex items-start gap-4">
+              <Lock className="h-6 w-6 text-primary mt-1" />
+              <div>
+                <h2 className="text-2xl font-semibold mb-3">Indicadores de privacidad</h2>
+                <div className="space-y-2 text-muted-foreground">
+                  <p>
+                    Cada historia muestra un badge de color que indica su nivel de privacidad:
+                  </p>
+                  <p className="mt-3">
+                    <strong className="text-green-600 dark:text-green-400">🌐 Verde - Pública:</strong> Visible para todos los usuarios
+                  </p>
+                  <p>
+                    <strong className="text-blue-600 dark:text-blue-400">👥 Azul - Círculo:</strong> Compartida con un círculo específico
+                  </p>
+                  <p>
+                    <strong className="text-purple-600 dark:text-purple-400">👥 Morado - Compartida:</strong> Compartida con usuarios específicos
+                  </p>
+                  <p>
+                    <strong className="text-orange-600 dark:text-orange-400">🔒 Naranja - Privada:</strong> Solo visible para ti
+                  </p>
+                  <p className="mt-4 text-sm">
+                    Los badges aparecen en la esquina superior izquierda de cada tarjeta de historia
                   </p>
                 </div>
               </div>

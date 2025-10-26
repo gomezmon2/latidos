@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Calendar, Heart, MessageCircle } from "lucide-react";
+import { Calendar, Heart, MessageCircle, Globe, Lock, Users } from "lucide-react";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import { TagBadge } from "@/components/TagBadge";
 import { FavoriteButton } from "@/components/FavoriteButton";
@@ -37,6 +38,41 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
     navigate(`${ROUTES.EXPERIENCE}/${experience.id}`);
   };
 
+  const getPrivacyInfo = () => {
+    if (experience.is_public) {
+      return {
+        icon: Globe,
+        label: "Pública",
+        variant: "default" as const,
+        className: "bg-green-500/90 text-white hover:bg-green-600"
+      };
+    } else if (experience.shared_circle_id) {
+      return {
+        icon: Users,
+        label: "Círculo",
+        variant: "secondary" as const,
+        className: "bg-blue-500/90 text-white hover:bg-blue-600"
+      };
+    } else if (experience.shared_with && experience.shared_with.length > 0) {
+      return {
+        icon: Users,
+        label: "Compartida",
+        variant: "secondary" as const,
+        className: "bg-purple-500/90 text-white hover:bg-purple-600"
+      };
+    } else {
+      return {
+        icon: Lock,
+        label: "Privada",
+        variant: "destructive" as const,
+        className: "bg-orange-500/90 text-white hover:bg-orange-600"
+      };
+    }
+  };
+
+  const privacyInfo = getPrivacyInfo();
+  const PrivacyIcon = privacyInfo.icon;
+
   return (
     <Card
       className="overflow-hidden group hover:shadow-[var(--shadow-elevated)] transition-[var(--transition-smooth)] cursor-pointer border-border/50"
@@ -54,6 +90,14 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
+          {/* Badge de privacidad */}
+          <div className="absolute top-3 left-3">
+            <Badge className={`${privacyInfo.className} gap-1`}>
+              <PrivacyIcon className="h-3 w-3" />
+              <span className="text-xs">{privacyInfo.label}</span>
+            </Badge>
+          </div>
+
           {/* Botón de favorito sobre la imagen */}
           <div className="absolute top-3 right-3">
             <FavoriteButton
@@ -67,6 +111,14 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
       ) : (
         <div className="relative h-64 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
           <p className="text-muted-foreground text-sm">Sin imagen</p>
+
+          {/* Badge de privacidad */}
+          <div className="absolute top-3 left-3">
+            <Badge className={`${privacyInfo.className} gap-1`}>
+              <PrivacyIcon className="h-3 w-3" />
+              <span className="text-xs">{privacyInfo.label}</span>
+            </Badge>
+          </div>
 
           {/* Botón de favorito cuando no hay imagen */}
           <div className="absolute top-3 right-3">

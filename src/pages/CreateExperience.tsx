@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { ArrowLeft, ImagePlus, Send, X, Upload, Lock, Globe } from "lucide-react";
+import { ArrowLeft, ImagePlus, Send, X, Upload, Lock, Globe, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { ExperienceService } from "@/services/experience.service";
@@ -460,9 +460,15 @@ const CreateExperience = () => {
                 </Button>
                 <Button type="submit" disabled={isSubmitting || isUploadingImage} className="gap-2">
                   {isUploadingImage ? (
-                    "Subiendo imagen..."
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Subiendo imagen...
+                    </>
                   ) : isSubmitting ? (
-                    "Publicando..."
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Publicando...
+                    </>
                   ) : (
                     <>
                       <Send className="h-4 w-4" />

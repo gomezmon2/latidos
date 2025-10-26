@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Heart, Book, Lock, Users, FileText, Share2, ChevronRight, CircleDot, MessageCircle } from "lucide-react";
+import { Heart, Book, Lock, Users, FileText, Share2, ChevronRight, CircleDot, MessageCircle, Palette, Search } from "lucide-react";
 import { ROUTES } from "@/routes";
 
 /**
@@ -162,6 +162,42 @@ export const WhatIsLatidos = () => {
               <p><strong>Notificaciones:</strong> Contador de mensajes no leídos</p>
               <p className="pt-2 text-xs">
                 Inicia conversaciones desde Compartidos
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Card 8: Búsqueda y filtros */}
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <Search className="h-5 w-5 text-primary" />
+                Búsqueda avanzada
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground space-y-2">
+              <p><strong>Busca:</strong> Por título, contenido o autor</p>
+              <p><strong>Filtra:</strong> Por etiquetas temáticas</p>
+              <p><strong>Combina:</strong> Búsqueda y filtros simultáneos</p>
+              <p className="pt-2 text-xs">
+                Resultados en tiempo real
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Card 9: Personalización */}
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <Palette className="h-5 w-5 text-primary" />
+                Personalización
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground space-y-2">
+              <p><strong>Modo oscuro:</strong> Tres opciones disponibles</p>
+              <p><strong>Iconos personalizados:</strong> Interfaz intuitiva</p>
+              <p><strong>Navegación rápida:</strong> Botones flotantes</p>
+              <p className="pt-2 text-xs">
+                Optimizado para móvil y escritorio
               </p>
             </CardContent>
           </Card>

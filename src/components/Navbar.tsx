@@ -109,83 +109,184 @@ export const Navbar = () => {
             </span>
           </Link>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-6">
+          {/* Navigation Icons - Desktop */}
+          <div className="hidden md:flex items-center space-x-2">
             <TooltipProvider delayDuration={300}>
+              {/* Home */}
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link
-                    to={ROUTES.EXPLORE}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                  <Button
+                    variant="ghost"
+                    className="relative h-12 w-12 rounded-full p-0"
+                    asChild
                   >
-                    Explorar
-                  </Link>
+                    <Link to={ROUTES.HOME} className="flex items-center justify-center">
+                      <img
+                        src="/home.png"
+                        alt="Home"
+                        className="h-12 w-12 object-contain"
+                      />
+                    </Link>
+                  </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Descubre historias públicas de la comunidad</p>
+                  <p>Inicio</p>
+                </TooltipContent>
+              </Tooltip>
+
+              {/* Explorar */}
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="relative h-12 w-12 rounded-full p-0"
+                    asChild
+                  >
+                    <Link to={ROUTES.EXPLORE} className="flex items-center justify-center">
+                      <img
+                        src="/explorar.png"
+                        alt="Explorar"
+                        className="h-12 w-12 object-contain"
+                      />
+                    </Link>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Explorar historias</p>
                 </TooltipContent>
               </Tooltip>
 
               {user && (
                 <>
+                  {/* Mensajes con badge */}
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link
-                        to={ROUTES.MY_STORIES}
-                        className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                      <Button
+                        variant="ghost"
+                        className="relative h-9 w-9 rounded-full p-0"
+                        asChild
                       >
-                        Mis Historias
-                      </Link>
+                        <Link to={ROUTES.CHAT} className="flex items-center justify-center">
+                          <img
+                            src="/mensaje.png"
+                            alt="Mensajes"
+                            className="h-9 w-9 object-contain"
+                          />
+                          {totalUnread > 0 && (
+                            <Badge
+                              variant="destructive"
+                              className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                            >
+                              {totalUnread > 9 ? "9+" : totalUnread}
+                            </Badge>
+                          )}
+                        </Link>
+                      </Button>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Ver todas las historias que has compartido</p>
+                      <p>Mensajes</p>
                     </TooltipContent>
                   </Tooltip>
 
+                  {/* Compartidos */}
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Link
-                        to={ROUTES.CREATE}
-                        className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                      <Button
+                        variant="ghost"
+                        className="relative h-12 w-12 rounded-full p-0"
+                        asChild
                       >
-                        Compartir
-                      </Link>
+                        <Link to={ROUTES.COMPARTIDOS} className="flex items-center justify-center">
+                          <img
+                            src="/comunidad.png"
+                            alt="Compartidos"
+                            className="h-12 w-12 object-contain"
+                          />
+                        </Link>
+                      </Button>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Crea y comparte una nueva historia</p>
-                    </TooltipContent>
-                  </Tooltip>
-
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link
-                        to={ROUTES.COMPARTIDOS}
-                        className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        Compartidos
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Gestiona tus conexiones con otros usuarios</p>
-                    </TooltipContent>
-                  </Tooltip>
-
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link
-                        to={ROUTES.CIRCLES}
-                        className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        Círculos
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Organiza compartidos en grupos temáticos</p>
+                      <p>Compartidos</p>
                     </TooltipContent>
                   </Tooltip>
                 </>
               )}
             </TooltipProvider>
+          </div>
+
+          {/* Navigation Icons - Mobile */}
+          <div className="flex md:hidden items-center space-x-1">
+            {/* Home */}
+            <Button
+              variant="ghost"
+              className="relative h-10 w-10 rounded-full p-0"
+              asChild
+            >
+              <Link to={ROUTES.HOME} className="flex items-center justify-center">
+                <img
+                  src="/home.png"
+                  alt="Home"
+                  className="h-8 w-8 object-contain"
+                />
+              </Link>
+            </Button>
+
+            {/* Explorar */}
+            <Button
+              variant="ghost"
+              className="relative h-10 w-10 rounded-full p-0"
+              asChild
+            >
+              <Link to={ROUTES.EXPLORE} className="flex items-center justify-center">
+                <img
+                  src="/explorar.png"
+                  alt="Explorar"
+                  className="h-8 w-8 object-contain"
+                />
+              </Link>
+            </Button>
+
+            {user && (
+              <>
+                {/* Mensajes con badge */}
+                <Button
+                  variant="ghost"
+                  className="relative h-10 w-10 rounded-full p-0"
+                  asChild
+                >
+                  <Link to={ROUTES.CHAT} className="flex items-center justify-center">
+                    <img
+                      src="/mensaje.png"
+                      alt="Mensajes"
+                      className="h-7 w-7 object-contain"
+                    />
+                    {totalUnread > 0 && (
+                      <Badge
+                        variant="destructive"
+                        className="absolute -top-1 -right-1 h-4 w-4 flex items-center justify-center p-0 text-[10px]"
+                      >
+                        {totalUnread > 9 ? "9+" : totalUnread}
+                      </Badge>
+                    )}
+                  </Link>
+                </Button>
+
+                {/* Compartidos */}
+                <Button
+                  variant="ghost"
+                  className="relative h-10 w-10 rounded-full p-0"
+                  asChild
+                >
+                  <Link to={ROUTES.COMPARTIDOS} className="flex items-center justify-center">
+                    <img
+                      src="/comunidad.png"
+                      alt="Compartidos"
+                      className="h-8 w-8 object-contain"
+                    />
+                  </Link>
+                </Button>
+              </>
+            )}
           </div>
 
           {/* User Menu or Auth Buttons */}
