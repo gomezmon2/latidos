@@ -2498,9 +2498,163 @@ const user2 = currentUserId < otherUserId ? otherUserId : currentUserId;
 
 ---
 
+## 26 Octubre 2025 - v3.4.0: Buscador de Usuarios y Mejoras en Compartidos
+
+### 🎯 Objetivo
+Permitir a los usuarios buscar y añadir compartidos directamente sin necesidad de hacerlo desde una historia.
+
+### ✅ Características Implementadas
+
+#### 1. Servicio de Búsqueda de Usuarios
+**Archivo**: `src/services/user.service.ts`
+
+**Métodos creados**:
+```typescript
+- searchUsers(query, limit): Buscar usuarios por nombre
+- getUserProfile(userId): Obtener perfil de un usuario
+- getUserProfiles(userIds[]): Obtener múltiples perfiles
+```
+
+**Características**:
+- Búsqueda por nombre con ILIKE (case-insensitive)
+- Excluye automáticamente al usuario actual
+- Límite configurable de resultados (default: 20)
+- Manejo de errores robusto
+
+#### 2. Componente UserSearchBar
+**Archivo**: `src/components/UserSearchBar.tsx`
+
+**Funcionalidades**:
+- Barra de búsqueda en tiempo real
+- Mínimo 2 caracteres para activar búsqueda
+- Muestra resultados con avatar y nombre
+- Botón "Añadir" para enviar solicitud de compartido
+- Filtra automáticamente usuarios ya conectados
+- Estados de carga ("Buscando...")
+- Mensajes informativos:
+  - Estado inicial: "Escribe al menos 2 caracteres..."
+  - Sin resultados: "No se encontraron usuarios..."
+  - Resultados: "X usuario(s) encontrado(s)"
+
+**Props**:
+```typescript
+interface UserSearchBarProps {
+  onUserSelect?: (user: UserProfile) => void;
+  onAddShared: (userId: string) => Promise<void>;
+  excludeUserIds?: string[];
+}
+```
+
+#### 3. Página Compartidos Mejorada
+**Archivo**: `src/pages/Compartidos.tsx`
+
+**Cambios principales**:
+- Nueva pestaña **"Buscar"** (primera pestaña, por defecto)
+- Total de 4 pestañas:
+  1. **Buscar** - Buscador de usuarios
+  2. **Compartidos** - Conexiones aceptadas (antes era la primera)
+  3. **Recibidas** - Solicitudes pendientes
+  4. **Enviadas** - Solicitudes enviadas
+
+**Función añadida**:
+```typescript
+handleSendConnectionRequest(userId): Envía solicitud de compartido
+getExcludedUserIds(): Retorna IDs de usuarios a excluir del buscador
+```
+
+**Integración**:
+- Filtrado automático de usuarios ya conectados o con solicitudes pendientes
+- Recarga automática de datos después de enviar solicitud
+- Usuario desaparece de resultados inmediatamente después de añadirlo
+
+#### 4. Documentación Actualizada
+**Archivo**: `src/pages/Guides.tsx`
+
+**Nuevas instrucciones**:
+- Cómo buscar usuarios desde Compartidos
+- Uso de la pestaña "Buscar"
+- Flujo completo de gestión de compartidos:
+  - Buscar → Enviar solicitud → Aceptar → Gestionar
+
+### 🐛 Bugs Solucionados
+
+#### Fix: Parámetro incorrecto en sendConnectionRequest
+**Problema**: El método `sendConnectionRequest` esperaba un objeto DTO pero se llamaba con un string
+
+**Solución**:
+```typescript
+// Antes (incorrecto)
+await ConnectionService.sendConnectionRequest(userId);
+
+// Después (correcto)
+await ConnectionService.sendConnectionRequest({
+  shared_user_id: userId,
+});
+```
+
+### 📊 Flujo de Usuario Mejorado
+
+**Antes**:
+1. Usuario debía encontrar una historia de otro usuario
+2. Ver detalle de la historia
+3. Click en botón "Añadir como compartido"
+
+**Ahora**:
+1. Usuario va a **Compartidos**
+2. Pestaña **"Buscar"** abierta por defecto
+3. Escribe nombre del usuario
+4. Ve resultados en tiempo real
+5. Click en **"Añadir"**
+6. Solicitud enviada inmediatamente
+
+### 🎨 Componentes UI Utilizados
+- Input con icono de búsqueda
+- Card para resultados
+- Avatar con fallback
+- Button con estados de carga
+- Tabs con 4 pestañas
+
+### 🔧 Decisiones Técnicas
+
+#### ¿Por qué búsqueda en la página Compartidos vs página separada?
+- **Contexto**: Los usuarios ya están en Compartidos para gestionar conexiones
+- **Menos navegación**: No requiere ir a otra página
+- **UX intuitivo**: Todo relacionado con compartidos en un solo lugar
+- **Pestañas claras**: Fácil alternar entre buscar, ver compartidos y gestionar solicitudes
+
+#### ¿Por qué búsqueda por nombre y no por email?
+- **Privacidad**: Los emails no deberían ser visibles públicamente
+- **UX**: Los usuarios recuerdan nombres, no emails
+- **Futuro**: Se puede extender a búsqueda por username si se implementa
+
+#### ¿Por qué mínimo 2 caracteres?
+- **Performance**: Evita consultas innecesarias con 1 carácter
+- **Resultados útiles**: Con 1 carácter habría demasiados resultados
+- **UX estándar**: Es el mínimo común en buscadores
+
+### 📦 Archivos Modificados/Creados
+
+**Creados**:
+- `src/services/user.service.ts`
+- `src/components/UserSearchBar.tsx`
+
+**Modificados**:
+- `src/pages/Compartidos.tsx`
+- `src/pages/Guides.tsx`
+- `.gitignore` (añadido `Notas.txt`)
+
+### 🎯 Estado Final v3.4.0
+✅ Buscador de usuarios funcional
+✅ Añadir compartidos sin necesidad de historias
+✅ Interfaz mejorada con 4 pestañas
+✅ Documentación actualizada
+✅ Filtrado automático de usuarios duplicados
+
+---
+
 **Servidor de desarrollo**: http://localhost:8081
-**Última actualización**: 26 Octubre 2025 - v3.3.0
-**Estado**: ✅ Sistema Core + Social Features + Favoritos + Privacidad + Chat en Tiempo Real + Documentación Completa - Listo para Despliegue
+**Última actualización**: 26 Octubre 2025 - v3.4.0
+**Estado**: ✅ Sistema Core + Social Features + Favoritos + Privacidad + Chat + Notificaciones + Buscador de Usuarios - Listo para Despliegue
 
 ---
 
