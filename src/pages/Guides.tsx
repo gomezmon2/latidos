@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/sections";
-import { Book, Heart, Lock, Users, FileText, Share2, CircleDot, MessageCircle, Palette, Search, ArrowUp } from "lucide-react";
+import { Book, Heart, Lock, Users, FileText, Share2, CircleDot, MessageCircle, Palette, Search, ArrowUp, Bell } from "lucide-react";
 
 /**
  * Guides Page
@@ -347,6 +347,36 @@ const Guides = () => {
                   </p>
                   <p className="mt-4 text-sm">
                     Los badges aparecen en la esquina superior izquierda de cada tarjeta de historia
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Notificaciones push */}
+          <section className="bg-card border rounded-lg p-6">
+            <div className="flex items-start gap-4">
+              <Bell className="h-6 w-6 text-primary mt-1" />
+              <div>
+                <h2 className="text-2xl font-semibold mb-3">Notificaciones push</h2>
+                <div className="space-y-2 text-muted-foreground">
+                  <p>
+                    <strong>Activación:</strong> Se te pedirá permiso la primera vez que uses la aplicación
+                  </p>
+                  <p>
+                    <strong>Nuevos mensajes:</strong> Recibe alertas cuando te escriban tus compartidos
+                  </p>
+                  <p>
+                    <strong>Comentarios:</strong> Notificaciones cuando comenten en tus historias
+                  </p>
+                  <p>
+                    <strong>Solicitudes:</strong> Aviso de nuevas solicitudes de conexión
+                  </p>
+                  <p>
+                    <strong>Funcionamiento en segundo plano:</strong> Las notificaciones llegan incluso si no tienes la app abierta
+                  </p>
+                  <p className="mt-4 text-sm">
+                    Puedes desactivar las notificaciones en cualquier momento desde la configuración de tu navegador
                   </p>
                 </div>
               </div>

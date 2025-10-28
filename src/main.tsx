@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { router } from "@/routes";
+import { NotificationService } from "@/services/notification.service";
 import "./index.css";
 
 // Configure React Query client
@@ -24,6 +25,13 @@ const rootElement = document.getElementById("root");
 
 if (!rootElement) {
   throw new Error("Root element not found");
+}
+
+// Inicializar Service Worker para notificaciones
+if ('serviceWorker' in navigator) {
+  NotificationService.initialize().catch((error) => {
+    console.warn('No se pudo inicializar el Service Worker:', error);
+  });
 }
 
 // Render application

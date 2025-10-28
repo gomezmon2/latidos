@@ -93,6 +93,9 @@ const ChatWindow = () => {
       if (user) {
         await MessageService.markMessagesAsRead(id, user.id);
       }
+
+      // Scroll to bottom after loading messages
+      setTimeout(() => scrollToBottom(), 200);
     } catch (error: any) {
       toast({
         title: "Error al cargar mensajes",
@@ -131,7 +134,13 @@ const ChatWindow = () => {
 
   const scrollToBottom = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+      // Usar setTimeout para asegurar que el DOM se haya actualizado
+      setTimeout(() => {
+        scrollRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "end"
+        });
+      }, 100);
     }
   };
 

@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Message } from "@/types/chat";
 import { ROUTES } from "@/routes";
+import { NotificationService } from "@/services/notification.service";
 
 export const MessageNotifications = () => {
   const { user } = useAuth();
@@ -73,6 +74,12 @@ export const MessageNotifications = () => {
               duration: 5000,
             }
           );
+
+          // Enviar notificación push si el documento no está visible
+          if (document.hidden && NotificationService.getPermissionStatus() === 'granted') {
+            const chatUrl = `${window.location.origin}${ROUTES.CHAT}/${newMessage.conversation_id}`;
+            await NotificationService.notifyNewMessage(senderName, messagePreview, chatUrl);
+          }
         }
       )
       .subscribe();

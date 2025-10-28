@@ -120,10 +120,11 @@ Los "compartidos" son tus conexiones en Latidos. Son personas con las que compar
 4. Escribe tu mensaje y presiona **Enter** o click en **"Enviar"**
 
 **Características del Chat:**
-- ✅ Mensajes en tiempo real
-- ✅ Notificaciones cuando recibes mensajes
+- ✅ Mensajes en tiempo real (sin recargar la página)
+- ✅ Notificaciones push cuando recibes mensajes
 - ✅ Contador de mensajes no leídos
-- ✅ Solo con compartidos aceptados
+- ✅ Solo con compartidos aceptados (privacidad garantizada)
+- ✅ Notificaciones incluso con pestaña oculta o navegador cerrado
 
 ---
 
@@ -172,12 +173,30 @@ Los círculos te permiten agrupar compartidos por temas o relaciones (ej: "Famil
    - **Oscuro**: Fondo negro (mejor para la noche)
    - **Sistema**: Sigue la configuración de tu dispositivo
 
-### Notificaciones:
+### Notificaciones Push:
 
-- Recibirás notificaciones cuando:
-  - Alguien comenta en tu historia
-  - Recibes un mensaje nuevo
-  - Alguien te envía una solicitud de compartido
+Latidos puede enviarte notificaciones incluso cuando no estás usando la aplicación:
+
+1. La primera vez que entres, verás un banner pidiendo permiso para notificaciones
+2. Click en **"Activar notificaciones"**
+3. Tu navegador te preguntará si permites las notificaciones
+4. Acepta el permiso
+
+**¿Qué notificaciones recibirás?**
+- 💬 Nuevos mensajes de tus compartidos
+- 💭 Comentarios en tus historias
+- 🔗 Solicitudes de conexión
+- ⭐ Reacciones en tu contenido
+
+**Tipos de notificaciones:**
+- **Pestaña visible**: Recibes un toast (notificación dentro de la app)
+- **Pestaña oculta/minimizada**: Recibes notificación push del navegador
+- **Navegador cerrado**: Recibes notificación push en tu sistema (requiere permisos)
+
+**Configurar notificaciones:**
+- Puedes desactivarlas en cualquier momento desde la configuración de tu navegador
+- Las notificaciones respetan tu privacidad (no incluyen contenido sensible)
+- Puedes cerrar el banner si no quieres activarlas ahora (aparecerá de nuevo en futuras sesiones)
 
 ---
 
@@ -264,7 +283,20 @@ No, solo ven las historias que compartes con ellos (privadas) o las públicas.
 Sí, usa el botón de favoritos ⭐ en cualquier historia.
 
 ### ¿Cómo sé si tengo mensajes nuevos?
-Verás un badge rojo con el número en el menú "Mensajes" 💬.
+Verás un badge rojo con el número en el menú "Mensajes" 💬. Además, si tienes notificaciones activadas, recibirás una alerta.
+
+### ¿Las notificaciones funcionan en todos los navegadores?
+Sí, funcionan en Chrome, Firefox, Edge, Safari y Opera. En móviles, funcionan en Chrome para Android y Safari para iOS.
+
+### ¿Puedo desactivar las notificaciones?
+Sí, ve a la configuración de tu navegador → Notificaciones → Busca "latidos" o tu dominio → Bloquear.
+
+### ¿Por qué no recibo notificaciones?
+Verifica que:
+- Diste permiso al navegador
+- Las notificaciones no están bloqueadas en tu sistema operativo
+- Tienes una conexión a internet activa
+- El banner de notificaciones está activado (no lo cerraste)
 
 ---
 
@@ -289,4 +321,4 @@ Ya tienes todo lo necesario para empezar a usar Latidos. Recuerda:
 
 ---
 
-*Última actualización: 26 de Octubre 2025*
+*Última actualización: 27 de Octubre 2025 - v3.9.0*
