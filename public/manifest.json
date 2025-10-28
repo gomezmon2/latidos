@@ -1,0 +1,48 @@
+{
+  "name": "Latidos - Historias Auténticas",
+  "short_name": "Latidos",
+  "description": "Plataforma para compartir historias y experiencias auténticas. Un espacio libre de likes y algoritmos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["social", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Nueva Historia",
+      "short_name": "Nueva",
+      "description": "Crear una nueva historia",
+      "url": "/create",
+      "icons": [{ "src": "/favicon.ico", "sizes": "96x96" }]
+    },
+    {
+      "name": "Chats",
+      "short_name": "Chats",
+      "description": "Ver mensajes",
+      "url": "/chats",
+      "icons": [{ "src": "/mensaje.png", "sizes": "96x96" }]
+    }
+  ],
+  "gcm_sender_id": "103953800507"
+}
